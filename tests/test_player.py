@@ -53,5 +53,9 @@ class TestPlayer(unittest.TestCase):
         players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
         self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
 
+    def test_sorted_quicksort(self):
+        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=1100-i) for i in range(1000)]
+        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
+
 if __name__ == '__main__':
     unittest.main()

@@ -277,7 +277,30 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+FAILED (errors=1)
+
+Error
+Traceback (most recent call last):
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\tests\test_player.py", line 58, in test_sorted_quicksort
+    self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
+                                                        ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\src\player.py", line 57, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\src\player.py", line 57, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\src\player.py", line 57, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  [Previous line repeated 982 more times]
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\src\player.py", line 53, in sort_quickly
+    if x > pivot:
+       ^^^^^^^^^
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\src\player.py", line 19, in __lt__
+    if self.score < other.score:
+       ^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
 ```
 
 Provide a reason why this test failed (if you got recursion errors, you need to explain **why** they occurred).
@@ -289,8 +312,29 @@ If your implementation did not fail, you must explain what changes you made to t
 Propose a fix to your sorting algorithm that fixes this issue.
 
 ```python
-# YOUR FIX HERE
-# Highlight what the fix was
+# By implementing a comparison of elements next to each other when running through the array,
+# it can be found out if the array is already sorted and returns the array itself without anymore recursion.
+# This works also for each recursion meaning it should cut down significantly on compute time
+# even if the original input array isn't fully sorted
+    def sort_quickly(cls, arr):
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[0]
+        left = []
+        right = []
+        prev = pivot
+        sorted = True
+        for x in arr[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+            if x > prev:
+                sorted = False
+            prev = x
+        if sorted:
+            return arr
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
 ```
 
 #### 5.3.5. Success criteria
@@ -303,7 +347,7 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
+I, Sahan Fernando - 20123308, completed this work in class 306, on 1/4/2025, under the supervision of Rafael Avigad.
 ```
 
 Or (if not completed in class):
