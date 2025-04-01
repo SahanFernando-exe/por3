@@ -7,6 +7,11 @@ class Player:
     def __str__(self):
         return f"location: {id(self)}, uid: {self._uid}, name: {self._name}"
 
+    def __lt__(self, other):
+        if self.score < other.score:
+            return True
+        return False
+
     def display(self):
         return f"Player '{self._uid}': {self._name}"
 
