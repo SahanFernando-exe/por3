@@ -35,5 +35,18 @@ class TestPlayer(unittest.TestCase):
         # Add the appropriate expression to the following assert test
         self.assertTrue(alice > bob)
 
+    def test_quicksort(self):
+        players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
+                   Player(name="Charlie", uid='03', score=15)]
+        # note: ensure initialization code is valid for **your** implementation
+
+        # do **not** change the following code:
+        sorted_players = Player.sort_quickly(arr=players)
+
+        # players must be sorted by score as shown here:
+        manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5)]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
+
 if __name__ == '__main__':
     unittest.main()

@@ -7,6 +7,9 @@ class Player:
     def __str__(self):
         return f"location: {id(self)}, uid: {self._uid}, name: {self._name}"
 
+    def __repr__(self):
+        return f"name: {self._name}, ID: {self._uid}, score: {self._score}"
+
     def __eq__(self, other):
         if isinstance(other, Player):
             return self.uid == other.uid
@@ -38,3 +41,17 @@ class Player:
             self._score = new_score
         else:
             raise ValueError("score cannot be below 0")
+
+    @classmethod
+    def sort_quickly(cls, arr):
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[0]
+        left = []
+        right = []
+        for x in arr[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)

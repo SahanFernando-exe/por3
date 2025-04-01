@@ -201,7 +201,7 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> if the array has more than one element the sorting algorithm takes the first element as base and sorts all following elements into 2 new arrays by comparing if they are greater or lesser than the base, then repeats for each of those arrays. this algorithm has a big O of n*log(n), this is because the algorithm has to go through the whole array the first time, then half the list each consequtive time (n + n/2 + n/4 + n/8...)
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -216,7 +216,18 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+    def test_quicksort(self):
+        players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
+                   Player(name="Charlie", uid='03', score=15)]
+        # note: ensure initialization code is valid for **your** implementation
+
+        # do **not** change the following code:
+        sorted_players = Player.sort_quickly(self=players[0], arr=players)
+
+        # players must be sorted by score as shown here:
+        manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5)]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
 ```
 
 #### 5.2.3. Success criteria
