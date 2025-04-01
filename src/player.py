@@ -7,12 +7,9 @@ class Player:
     def __str__(self):
         return f"location: {id(self)}, uid: {self._uid}, name: {self._name}"
 
-    def __repr__(self):
-        return f"ID:{self._uid}, Score:{self._score}"
-
     def __eq__(self, other):
         if isinstance(other, Player):
-            return self.__repr__() == other.__repr__()
+            return self.uid == other.uid
         return False
 
     def __lt__(self, other):
