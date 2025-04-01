@@ -50,15 +50,15 @@ class Player:
         left = []
         right = []
         prev = pivot
-        sorted = True
+        is_sorted = True
         for x in arr[1:]:
             if x > pivot:
                 left.append(x)
             else:
                 right.append(x)
             if x > prev:
-                sorted = False
+                is_sorted = False
             prev = x
-        if sorted:
+        if is_sorted:
             return arr
         return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
