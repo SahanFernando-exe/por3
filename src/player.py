@@ -1,8 +1,8 @@
 class Player:
-    def __init__(self, uid, name):
+    def __init__(self, uid, name, score=0):
         self._uid = str(uid)
         self._name = name
-        self._score = 0
+        self._score = score
 
     def __str__(self):
         return f"location: {id(self)}, uid: {self._uid}, name: {self._name}"
