@@ -134,12 +134,39 @@ Implement the appropriate magic method in the Player class and ensure you pass t
 Rerun `test_sort_players` does the test pass? If not, include the output below:
 
 ```text
-Your output here
+Failure
+Traceback (most recent call last):
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\tests\test_player.py", line 28, in test_sort_players
+    self.assertListEqual(sorted_players, manually_sorted_players)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [<src[33 chars]8E846F0690>, <src.player.Player object at 0x00[61 chars]820>] != [<src[33 chars]8E8465B6F0>, <src.player.Player object at 0x00[61 chars]BF0>]
+
+First differing element 0:
+<src.player.Player object at 0x0000018E846F0690>
+<src.player.Player object at 0x0000018E8465B6F0>
+
+- [<src.player.Player object at 0x0000018E846F0690>,
+?                                             ---
+
++ [<src.player.Player object at 0x0000018E8465B6F0>,
+?                                            +++
+
+-  <src.player.Player object at 0x0000018E846F0550>,
+?                                            ^^^^
+
++  <src.player.Player object at 0x0000018E846BD490>,
+?                                            ^^^^
+
+-  <src.player.Player object at 0x0000018E8465B820>]
+?                                            ^ ^^
+
++  <src.player.Player object at 0x0000018E846E1BF0>]
+?  
 ```
 
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to - you need to figure out what that is!)?
 
-> Answer here
+> list is comparing the object instances in memory rather than their value
 
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.
 
