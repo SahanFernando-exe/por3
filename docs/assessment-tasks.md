@@ -90,7 +90,7 @@ TypeError: '<' not supported between instances of 'Player' and 'Player'
 
 The tests checks that calling sorted on a list of players will sort them by score, what is the **only** magic method that must be implemented in the player class for the `sorted` function to succeed?
 
-> Answer Here
+> ```__lt__()```
 
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -109,7 +109,14 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+FAILED (errors=1)
+
+Error
+Traceback (most recent call last):
+  File "C:\Users\Fernas\source\repos\Sahan - por 3\tests\test_player.py", line 36, in test_players_can_be_compared_by_score
+    self.assertTrue(alice > bob)
+                    ^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'Player' and 'Player'
 ```
 
 Implement the appropriate magic method in the Player class and ensure you pass this test (and only this test!).
