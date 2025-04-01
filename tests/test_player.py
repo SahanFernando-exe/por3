@@ -1,5 +1,6 @@
 from src.player import Player
 import unittest
+import random
 
 class TestPlayer(unittest.TestCase):
     def setUp(self):
@@ -47,6 +48,10 @@ class TestPlayer(unittest.TestCase):
         manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5)]
 
         self.assertListEqual(sorted_players, manually_sorted_players)
+
+    def test_scaled_quicksort(self):
+        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
 
 if __name__ == '__main__':
     unittest.main()

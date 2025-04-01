@@ -255,7 +255,9 @@ Using the code above as a starting point, create a test case to test your custom
 Include your test case below:
 
 ```python
-
+    def test_scaled_quicksort(self):
+        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
 ```
 
 #### 5.3.2. Success criteria
