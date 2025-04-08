@@ -13,12 +13,12 @@ class Player:
     def __eq__(self, other):
         if isinstance(other, Player):
             return self.uid == other.uid
-        return False
+        return NotImplemented
 
     def __lt__(self, other):
-        if self.score < other.score:
-            return True
-        return False
+        if isinstance(other, Player):
+            return self.score < other.score
+        return NotImplemented
 
     def display(self):
         return f"Player '{self._uid}': {self._name}"
@@ -43,7 +43,7 @@ class Player:
             raise ValueError("score cannot be below 0")
 
     @classmethod
-    def sort_quickly(cls, arr):
+    def custom_sort(cls, arr):
         if len(arr) <= 1:
             return arr
         pivot = arr[0]
@@ -61,4 +61,4 @@ class Player:
             prev = x
         if is_sorted:
             return arr
-        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+        return cls.custom_sort(left) + [pivot] + cls.custom_sort(right)

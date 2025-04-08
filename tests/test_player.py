@@ -36,26 +36,26 @@ class TestPlayer(unittest.TestCase):
         # Add the appropriate expression to the following assert test
         self.assertTrue(alice > bob)
 
-    def test_quicksort(self):
+    def test_custom_sort(self):
         players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
                    Player(name="Charlie", uid='03', score=15)]
         # note: ensure initialization code is valid for **your** implementation
 
         # do **not** change the following code:
-        sorted_players = Player.sort_quickly(arr=players)
+        sorted_players = Player.custom_sort(arr=players)
 
         # players must be sorted by score as shown here:
         manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5)]
 
         self.assertListEqual(sorted_players, manually_sorted_players)
 
-    def test_scaled_quicksort(self):
+    def test_scaled_custom_sort(self):
         players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
-        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
+        self.assertListEqual(sorted(players, reverse=True), Player.custom_sort(players))
 
-    def test_sorted_quicksort(self):
+    def test_sorted_scaled_custom_sort(self):
         players = [Player(name=f"Player {i}", uid=f"{i:03}", score=1100-i) for i in range(1000)]
-        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
+        self.assertListEqual(sorted(players, reverse=True), Player.custom_sort(players))
 
 if __name__ == '__main__':
     unittest.main()

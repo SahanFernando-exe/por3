@@ -201,7 +201,9 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> if the array has more than one element the sorting algorithm takes the first element as base and sorts all following elements into 2 new arrays by comparing if they are greater or lesser than the base, then repeats for each of those arrays. this algorithm has a big O of n*log(n), this is because the algorithm has to go through the whole array the first time, then half the list each consequtive time (n + n/2 + n/4 + n/8...)
+> If the array has more than one element the sorting algorithm takes the first element as base and sorts all following elements into 2 new arrays by comparing if they are greater or lesser than the base, then repeats for each of those arrays.
+> This algorithm has a time complexity of nlog(n) this is because the algorithm has to go through the whole array the first time, then half the list each consequtive time (n + n/2 + n/4 + n/8...).
+> because this algorithm recursively runs through the whole array -1 item each time, the space complexity is n+n-1+n-2...n-n, which can be reordered to (n(n-1))/2 and in reference to big O it can be further simplified to O(n^2)
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -217,17 +219,18 @@ Include your code below:
 
 ```python
     def test_quicksort(self):
-        players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
-                   Player(name="Charlie", uid='03', score=15)]
-        # note: ensure initialization code is valid for **your** implementation
+  players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
+             Player(name="Charlie", uid='03', score=15)]
+  # note: ensure initialization code is valid for **your** implementation
 
-        # do **not** change the following code:
-        sorted_players = Player.sort_quickly(self=players[0], arr=players)
+  # do **not** change the following code:
+  sorted_players = Player.custom_sort(self=players[0], arr=players)
 
-        # players must be sorted by score as shown here:
-        manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5)]
+  # players must be sorted by score as shown here:
+  manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10),
+                             Player(name="Bob", uid='02', score=5)]
 
-        self.assertListEqual(sorted_players, manually_sorted_players)
+  self.assertListEqual(sorted_players, manually_sorted_players)
 ```
 
 #### 5.2.3. Success criteria
@@ -256,8 +259,8 @@ Include your test case below:
 
 ```python
     def test_scaled_quicksort(self):
-        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
-        self.assertListEqual(sorted(players, reverse=True), Player.sort_quickly(players))
+  players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+  self.assertListEqual(sorted(players, reverse=True), Player.custom_sort(players))
 ```
 
 #### 5.3.2. Success criteria
@@ -307,7 +310,7 @@ Provide a reason why this test failed (if you got recursion errors, you need to 
 
 If your implementation did not fail, you must explain what changes you made to the original algorithm given by the senior developer to ensure that it did not fail.
 
-> Answer here
+> To avoid infinite recursion problems python caps how many recursions can be done and if it exceeds that limit it will throw an error.
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
@@ -316,25 +319,25 @@ Propose a fix to your sorting algorithm that fixes this issue.
 # it can be found out if the array is already sorted and returns the array itself without anymore recursion.
 # This works also for each recursion meaning it should cut down significantly on compute time
 # even if the original input array isn't fully sorted
-    def sort_quickly(cls, arr):
-        if len(arr) <= 1:
-            return arr
-        pivot = arr[0]
-        left = []
-        right = []
-        prev = pivot
-        sorted = True
-        for x in arr[1:]:
-            if x > pivot:
-                left.append(x)
-            else:
-                right.append(x)
-            if x > prev:
-                sorted = False
-            prev = x
-        if sorted:
-            return arr
-        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+def sort_quickly(cls, arr):
+  if len(arr) <= 1:
+    return arr
+  pivot = arr[0]
+  left = []
+  right = []
+  prev = pivot
+  sorted = True
+  for x in arr[1:]:
+    if x > pivot:
+      left.append(x)
+    else:
+      right.append(x)
+    if x > prev:
+      sorted = False
+    prev = x
+  if sorted:
+    return arr
+  return cls.custom_sort(left) + [pivot] + cls.custom_sort(right)
 ```
 
 #### 5.3.5. Success criteria
